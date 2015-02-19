@@ -26,7 +26,7 @@
                     <td colspan="2"><asp:Button ID="login_button" runat="server" Text="LogIn" OnClick="login_button_Click"></asp:Button></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><asp:Button ID="redirect_button" runat="server" Text="I do not have an account" ValidationGroup="redirect"></asp:Button></td>
+                    <td colspan="2"><asp:Button ID="redirect_button" runat="server" Text="I do not have an account" ValidationGroup="redirect" OnClick="redirect_button_Click"></asp:Button></td>
                 </tr>
             </table>
        

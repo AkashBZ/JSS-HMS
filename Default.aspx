@@ -8,6 +8,7 @@
 <head id="Head1" runat="server">
     <title></title>
     <meta charset="utf-8"/>
+        <link rel="stylesheet" href="StyleSheet2.css" />
     <script type="text/javascript">
         function validateLength(oSrc, args) {
             args.IsValid = (args.Value.length >= 10);
@@ -29,7 +30,7 @@
             return false;
         }
 </script>
-    <link rel="stylesheet" href="StyleSheet.css" />
+ 
     <script src="JavaScript.js"></script>
 </head>
 <body>
@@ -37,6 +38,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="main_container">
         <header></header>
+
         <div id="main_section">
             <table>
                 <tr>

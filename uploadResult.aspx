@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="StyleSheet2.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -40,9 +41,9 @@
                 </center>
         </div>
         <asp:Panel ID="updateResult" runat="server">
-    <div style="width:400px; height:300px; background-color:Black; color: #FF3300; padding:15px; border:solid 1px #FF3300;">
+    <div style="width:400px; height:370px; background-color:Black; color: #FF3300; padding:15px; border:solid 1px #FF3300;">
     <h2>Update Result</h2>
-    <p>You must update your result for verification. Please note that the document is a PDF file.</p>
+    <p>You must update your result for verification. PLEASE NOTE THAT THE FILE IS A PDF FILE AND ITS SIZE SHOULD NOT EXCEED 300KB .</p>
         <p>Its simple. Click on the button below and browse for the result!</p>
         <asp:FileUpload ID="resultUploader" runat="server"  />
         <p>Now when you have chosen the result file hit the 'Upload' button. </p>
@@ -55,7 +56,7 @@
     
     </div>
     </asp:Panel>
-    <cc1:ModalPopupExtender ID="updateresult_ModalPopupExtender" runat="server" 
+    <cc1:ModalPopupExtender ID="updateresult_ModalPopupExtender" runat="server" BackgroundCssClass="popupClass" 
          Enabled="True" TargetControlID="upload" 
         PopupControlID="updateResult" CancelControlID="closeuploader" Drag="True">
     </cc1:ModalPopupExtender>

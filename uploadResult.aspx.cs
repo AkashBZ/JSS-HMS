@@ -19,12 +19,13 @@ public partial class uploadResult : System.Web.UI.Page
         {
             seeResult.Visible = true;
             not_now.Visible = false;
+            upload.Text = "Upload Another Result";
         }
 
 
         if (Session["name"] != null)
         {
-            name.Text = "Welcome " + Session["name"].ToString() + ". You have successfully registered! Time to upload your result. ";
+            name.Text = "Welcome " + Session["name"].ToString() + ". Here are your Details ";
             email.Text = Session["email"].ToString();
             phone.Text = Session["phone"].ToString();
             uni_roll.Text = Session["uni_roll"].ToString();
@@ -52,31 +53,39 @@ public partial class uploadResult : System.Web.UI.Page
     {
         if (resultUploader.PostedFile.ContentType == "application/pdf")
         {
-            string filename = Path.GetFileName(resultUploader.FileName);
-            resultUploader.SaveAs(Server.MapPath("result/") + Session["uni_roll"] + filename);
+            if (resultUploader.PostedFile.ContentLength < 300000)
+            {
+                string filename = Path.GetFileName(resultUploader.FileName);
+                resultUploader.SaveAs(Server.MapPath("result/") + Session["uni_roll"] + filename);
 
-            con.Open();
-            string qry = "update details set result='" +Session["uni_roll"]+ filename + "' where name='" + Session["name"] + "'";
-            
-            SqlCommand cmd = new SqlCommand(qry, con);
-            
-            cmd.ExecuteNonQuery();
-            con.Close();
-            Response.Write("<script language=javascript'>alert('Result was successfully uploaded! Thank you for registering!');</script>");
-            Response.Redirect("Default.aspx");
-            
+                con.Open();
+                string qry = "update details set result='" + Session["uni_roll"] + filename + "' where name='" + Session["name"] + "'";
+
+                SqlCommand cmd = new SqlCommand(qry, con);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Response.Write("<script language=javascript'>alert('Result was successfully uploaded! Thank you for registering!');</script>");
+                Response.Redirect("Default.aspx");
+
+            }
+            else
+            { Response.Write("File size exceeds 300kbs."); }
         }
     }
     protected void seeResult_Click(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
             con.Open();
-            string qry = "select result from details where name=" + Session["name"];
+            string qry = "select result from details where name='" + Session["name"].ToString() + "'";
             SqlCommand cmd = new SqlCommand(qry, con);
             SqlDataReader r = cmd.ExecuteReader();
-            Response.Redirect("resultPage.aspx?result=" + r);
-        }
-        catch { Response.Write("<script language=javascript'>alert('Unable to load PDF Reader. Try again later!');</script>"); }
+            r.Read();
+            Response.Redirect("resultPage.aspx?result=" + r.GetString(0));
+        //}
+        //catch { Response.Write("<script language=javascript'>alert('Unable to load PDF Reader. Try again later!');</script>");
+        //Response.Write("hi");
+        //}
     }
 }

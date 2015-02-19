@@ -7,12 +7,21 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
+using System.Web.Query;
 
 public partial class uploadResult : System.Web.UI.Page
 {
     SqlConnection con = new SqlConnection("server=AKASH-PC\\SA; initial catalog=jsshms; user=sa; password=sa123;");
     protected void Page_Load(object sender, EventArgs e)
     {
+        string visibility = Request.QueryString["hasUploadedResult"];
+        if (visibility == "true")
+        {
+            seeResult.Visible = true;
+            not_now.Visible = false;
+        }
+
+
         if (Session["name"] != null)
         {
             name.Text = "Welcome " + Session["name"].ToString() + ". You have successfully registered! Time to upload your result. ";
@@ -23,6 +32,7 @@ public partial class uploadResult : System.Web.UI.Page
             year.Text = Session["year"].ToString();
             backs.Text = Session["backs"].ToString();
             prev_room.Text = Session["prev_room"].ToString();
+            
         }
         else
         {
@@ -52,9 +62,21 @@ public partial class uploadResult : System.Web.UI.Page
             
             cmd.ExecuteNonQuery();
             con.Close();
-            Response.Write("<script type='text/javascript'>alert('Result was successfully uploaded! Thank you for registering!');</script>");
+            Response.Write("<script language=javascript'>alert('Result was successfully uploaded! Thank you for registering!');</script>");
             Response.Redirect("Default.aspx");
             
         }
+    }
+    protected void seeResult_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            con.Open();
+            string qry = "select result from details where name=" + Session["name"];
+            SqlCommand cmd = new SqlCommand(qry, con);
+            SqlDataReader r = cmd.ExecuteReader();
+            Response.Redirect("resultPage.aspx?result=" + r);
+        }
+        catch { Response.Write("<script language=javascript'>alert('Unable to load PDF Reader. Try again later!');</script>"); }
     }
 }

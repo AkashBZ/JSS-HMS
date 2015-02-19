@@ -11,8 +11,8 @@
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div id="main_section">
-        <center>
+    <div id="main_section" style="align-content:center; width:100%">
+        
             <table>
                 <tr>
                     <td>Email:</td>
@@ -23,13 +23,13 @@
                     <td><asp:TextBox ID="password" runat="server" TextMode="Password" ValidationGroup="login"></asp:TextBox></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><asp:Button ID="login_button" runat="server" Text="LogIn" ValidationGroup="login"></asp:Button></td>
+                    <td colspan="2"><asp:Button ID="login_button" runat="server" Text="LogIn" OnClick="login_button_Click"></asp:Button></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><asp:Button ID="redirect_button" runat="server" Text="I do not have an account"></asp:Button></td>
+                    <td colspan="2"><asp:Button ID="redirect_button" runat="server" Text="I do not have an account" ValidationGroup="redirect"></asp:Button></td>
                 </tr>
             </table>
-        </center>
+       
         
     </div>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="This is a required field" Display="None" ControlToValidate="email"></asp:RequiredFieldValidator>

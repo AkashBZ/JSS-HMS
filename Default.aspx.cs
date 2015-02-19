@@ -32,7 +32,7 @@ public partial class _Default : System.Web.UI.Page
             Session["year"] = DropDownList2.SelectedItem;
             Session["backs"] = DropDownList1.SelectedItem;
             Session["prev_room"] = prev_room.Text;
-            Response.Redirect("uploadResult.aspx");
+            Response.Redirect("uploadResult.aspx?hasUploadedResult=false");
         }
         catch {
             Response.Write("<script type='text/javascript'>alert('There was some error connecting to the database. Please try again later!');</script>");

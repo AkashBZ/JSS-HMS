@@ -36,6 +36,7 @@
             <center>
             <asp:Button ID="upload" runat="server" Text="Upload Result Now" />
             <asp:Button ID="not_now" runat="server" Text="No. I'll Come Back Later" OnClick="not_now_Click" />
+                <asp:Button ID="seeResult" runat="server" Text="View Uploaded Result" Visible="false" OnClick="seeResult_Click"></asp:Button>
                 </center>
         </div>
         <asp:Panel ID="updateResult" runat="server">
